@@ -673,6 +673,7 @@ public class MuxingTest {
 		return null;
 	}
 	
+	/* do not merge this
 	@Test
 	public void testVideoOnlyStreaming() {
 		Process rtmpSendingProcess = null;
@@ -695,5 +696,6 @@ public class MuxingTest {
 
 		rtmpSendingProcess.destroy();
 	}
+	*/
 
 }
