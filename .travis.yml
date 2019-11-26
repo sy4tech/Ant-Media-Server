@@ -1,6 +1,7 @@
 dist: mongo:4-bionic
 language: java
-
+jdk:
+  - openjdk8
 
 sudo: required
 
