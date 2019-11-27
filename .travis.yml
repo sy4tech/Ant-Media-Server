@@ -1,5 +1,7 @@
 dist: mongo:4-bionic
 
+sudo: required
+
 # Sonar cloud addons on travis has some issues so that it's used directly 
 addons:
   sonarcloud:
@@ -13,15 +15,15 @@ before_install:
   - java -version
   - whoami
   - apt-get update
-  - apt-get install openjdk-8-jdk -y
-  - update-java-alternatives --set /usr/lib/jvm/java-1.8.0-openjdk-amd64
+  - sudo apt-get install openjdk-8-jdk maven -y
+  - sudo update-java-alternatives --set /usr/lib/jvm/java-1.8.0-openjdk-amd64
   - java -version
   - openssl aes-256-cbc -K $encrypted_5fef4fa28306_key -iv $encrypted_5fef4fa28306_iv -in codesigning.asc.enc -out codesigning.asc -d
   - gpg --fast-import codesigning.asc
-  - apt-get install ffmpeg -qq # start ffmpeg
-  - mongod &
-  - apt-get install wondershaper
-  - git clone --depth=1 https://github.com/ant-media/utilities.git /usr/local/onvif
+  - sudo apt-get install ffmpeg -qq # start ffmpeg
+  - sudo mongod &
+  - sudo apt-get install wondershaper
+  - sudo git clone --depth=1 https://github.com/ant-media/utilities.git /usr/local/onvif
     # get parent project
   - (if [ $(git ls-remote https://github.com/ant-media/ant-media-server-parent.git $TRAVIS_BRANCH  | wc -l) == "1" ];  
       then 
@@ -32,7 +34,7 @@ before_install:
         git clone --depth=1 https://github.com/ant-media/ant-media-server-parent.git;  
     fi)
   - cd ant-media-server-parent
-  - mvn clean install -DskipTests -Dmaven.javadoc.skip=true -Dgpg.skip=true --quiet
+  - sudo mvn clean install -DskipTests -Dmaven.javadoc.skip=true -Dgpg.skip=true --quiet
   - cd ..
     #get common project
   - (if [ $(git ls-remote https://github.com/ant-media/Ant-Media-Server-Common.git $TRAVIS_BRANCH  | wc -l) == "1" ];  
@@ -44,7 +46,7 @@ before_install:
        git clone --depth=1 https://github.com/ant-media/Ant-Media-Server-Common.git;  
      fi)
   - cd Ant-Media-Server-Common
-  - mvn clean install -DskipTests -Dmaven.javadoc.skip=true -Dgpg.skip=true --quiet
+  - sudo mvn clean install -DskipTests -Dmaven.javadoc.skip=true -Dgpg.skip=true --quiet
   - cd .. 
   
   #get service project
