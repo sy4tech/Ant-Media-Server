@@ -1,7 +1,4 @@
 dist: mongo:4-bionic
-language: java
-jdk:
-  - openjdk8
 
 sudo: required
 
@@ -15,6 +12,11 @@ addons:
 #travis running  on ubuntu 14.04
 
 before_install:
+  - java -version
+  - whoami
+  - apt-get update
+  - apt-get install openjdk-8-jdk -y
+  - sudo update-java-alternatives --set /usr/lib/jvm/java-1.8.0-openjdk-amd64
   - java -version
   - openssl aes-256-cbc -K $encrypted_5fef4fa28306_key -iv $encrypted_5fef4fa28306_iv -in codesigning.asc.enc -out codesigning.asc -d
   - gpg --fast-import codesigning.asc
