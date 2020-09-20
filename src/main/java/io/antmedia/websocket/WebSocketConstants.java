@@ -14,7 +14,7 @@ public class WebSocketConstants {
 	
 	public static final String PING_COMMAND = "ping";
 	
-	public static final String PONG_COMMAND = "pongOk";
+	public static final String PONG_COMMAND = "pong";
 	
 	public static final String COMMAND = "command";
 
